@@ -53,7 +53,7 @@ def get_exist_locale_list(locale_path: str) -> {str: str}:
 
 def get_exist_locales(file: str) -> {str: str}:
     locales = {}
-    pattern = re.compile(r"L\[[\"\'](.+?)[\"\']\] = \"(.*)\"")
+    pattern = re.compile(r"L\[[\"\'](.+?)[\"\']\][\s]+=[\s]+[\"\'](.*)[\"\']")
 
     for line in open(file, encoding='utf8'):
         results = pattern.findall(line)
