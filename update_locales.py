@@ -17,7 +17,7 @@ def get_files(addon_path: str, ignore: [str] = ["git"]) -> str:
                     need_pass = True
                     break
 
-            if not need_pass and ".lua" in file_path:
+            if not need_pass and file_path[-4:] == ".lua":
                 files.append(file_path)
 
     return files
@@ -25,7 +25,8 @@ def get_files(addon_path: str, ignore: [str] = ["git"]) -> str:
 
 def generate_keys(files: [str]) -> [str]:
     dict_keys = []
-    pattern = re.compile(r"L\[\s*[\"\'](.+?)[\"\']\s*\]")
+    pattern = re.compile(r"L\[\s*[\"\']([\s\S]*?)[\"\']\s*\]")
+    concat_pattern = re.compile(r"\"\s*..\s*\"")
 
     for file in files:
         f = open(file, "r", encoding='utf8')
@@ -33,6 +34,7 @@ def generate_keys(files: [str]) -> [str]:
         results = pattern.findall(content)
         for result in results:
             if not result in dict_keys:
+                result = concat_pattern.sub("", result)
                 dict_keys.append(result)
         
         f.close()
@@ -42,16 +44,17 @@ def generate_keys(files: [str]) -> [str]:
 
 def get_exist_locale_list(locale_path: str) -> {str: str}:
     g = os.walk(locale_path)
-    files = {}
+    locale_files = {}
+
     for path, dir_list, file_list in g:
         for file_name in file_list:
             need_pass = False
             file_path = os.path.join(path, file_name)
-            if not need_pass and ".lua" in file_path:
-                lang_code = file_name.replace(".lua", "")
-                files[lang_code] = file_path
+            if not need_pass and file_path[-4:] == ".lua":
+                lang_code = file_name[:-4]
+                locale_files[lang_code] = file_path
 
-    return files
+    return locale_files
 
 
 def get_exist_locales(file: str) -> {str: str}:
