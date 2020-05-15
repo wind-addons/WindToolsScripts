@@ -3,7 +3,7 @@ from update_locales import *
 addon_path = "F:\Blizzard\World of Warcraft\Development\Addons\ElvUI_WindUI\\"
 
 # 扫描全部代码，找出需要进行本地化的字符串
-files = get_file_path(addon_path, ignore=["git", "Locales", "Libraries"])
+files = get_files(addon_path, ignore=["git", "Locales", "Libraries"])
 keys = generate_keys(files)
 keys.sort()
 

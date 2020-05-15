@@ -4,7 +4,7 @@ from pprint import pprint
 from shutil import copyfile
 
 
-def get_file_path(addon_path: str, ignore: [str] = ["git"]) -> str:
+def get_files(addon_path: str, ignore: [str] = ["git"]) -> str:
     g = os.walk(addon_path)
     files = []
 
@@ -25,14 +25,17 @@ def get_file_path(addon_path: str, ignore: [str] = ["git"]) -> str:
 
 def generate_keys(files: [str]) -> [str]:
     dict_keys = []
-    pattern = re.compile(r"L\[[\"\'](.+?)[\"\']\]")
+    pattern = re.compile(r"L\[\s*[\"\'](.+?)[\"\']\s*\]")
 
     for file in files:
-        for line in open(file, "r", encoding='utf8'):
-            results = pattern.findall(line)
-            for result in results:
-                if not result in dict_keys:
-                    dict_keys.append(result)
+        f = open(file, "r", encoding='utf8')
+        content = f.read()
+        results = pattern.findall(content)
+        for result in results:
+            if not result in dict_keys:
+                dict_keys.append(result)
+        
+        f.close()
 
     return dict_keys
 
