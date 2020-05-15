@@ -36,7 +36,7 @@ def generate_keys(files: [str]) -> [str]:
             if not result in dict_keys:
                 result = concat_pattern.sub("", result)
                 dict_keys.append(result)
-        
+
         f.close()
 
     return dict_keys
@@ -67,8 +67,27 @@ def get_exist_locales(file: str) -> {str: str}:
             key = result[0]
             value = result[1]
             locales[key] = value
-    
+
     return locales
+
+
+def add_other_locales(path: str, exist_locales={str: str}):
+    locale_files = get_exist_locale_list(locale_path=path)
+    temp_locales = {}
+
+    for lang_code, path in locale_files.items():
+        temp_locales[lang_code] = get_exist_locales(path)
+
+    for lang_code, temp_locale in temp_locales.items():
+        try:
+            exist_translations = exist_locales[lang_code]
+            for k, v in temp_locale.items():
+                try:
+                    exist_translation = exist_translations[k]
+                except KeyError:
+                    exist_locales[lang_code][k] = v
+        except:
+            pass
 
 
 def update_locales(keys, old: {str: str}, del_no_use: bool = True) -> {str: str}:

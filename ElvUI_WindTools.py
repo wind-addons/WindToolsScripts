@@ -13,6 +13,11 @@ exist_locales = {}
 for lang_code, path in locale_files.items():
     exist_locales[lang_code] = get_exist_locales(path)
 
+# 导入 ElvUI 翻译及旧插件的翻译
+add_other_locales("F:\Blizzard\World of Warcraft\Development\Addons\ElvUI\ElvUI\Locales", exist_locales)
+add_other_locales("F:\Blizzard\World of Warcraft\Development\Addons\ElvUI\ElvUI_OptionsUI\Locales", exist_locales)
+add_other_locales("F:\Blizzard\World of Warcraft\Development\Addons\ElvUI_WindTools\Locales", exist_locales)
+
 # 根据最新的字符串列表进行整理，翻译
 new_locales = {}
 for lang_code in exist_locales:
