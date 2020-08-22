@@ -1,2 +1,2 @@
-call conda activate math
+call conda activate deep
 python ElvUI_WindTools.py
