@@ -42,7 +42,7 @@ func main() {
 	overlays := loadOverlay(overlaysFileName)
 	overlayTiles := loadOverlayTiles(overlayTilesFileName)
 
-	mapTexture := make(map[int]map[string]string)
+	mapTexture := make(map[int]map[string][]int)
 
 	for _, overlayTile := range overlayTiles {
 		worldMapOverlayID := overlayTile.WorldMapOverlayID
@@ -57,13 +57,22 @@ func main() {
 		thisMap := mapTexture[overlay.UIMapArtID]
 
 		if thisMap == nil {
-			thisMap = make(map[string]string)
+			thisMap = make(map[string][]int)
 		}
 
-		if thisMap[textureInfo] != "" {
-			thisMap[textureInfo] = thisMap[textureInfo] + ", " + strconv.Itoa(overlayTile.ID)
+		if thisMap[textureInfo] == nil {
+			thisMap[textureInfo] = []int{overlayTile.FileDataID}
 		} else {
-			thisMap[textureInfo] = strconv.Itoa(overlayTile.FileDataID)
+			alreadyExist := false
+			for _, dataID := range thisMap[textureInfo] {
+				if dataID == overlayTile.FileDataID {
+					alreadyExist = true
+				}
+			}
+
+			if !alreadyExist {
+				thisMap[textureInfo] = append(thisMap[textureInfo], overlayTile.FileDataID)
+			}
 		}
 
 		mapTexture[overlay.UIMapArtID] = thisMap
@@ -164,7 +173,7 @@ func loadOverlayTiles(filePath string) map[int]overlayTile {
 	return overlayTiles
 }
 
-func exportData(filePath string, data map[int]map[string]string) {
+func exportData(filePath string, data map[int]map[string][]int) {
 	os.Remove(filePath)
 	file, err := os.Create(filePath)
 	if err != nil {
@@ -190,7 +199,18 @@ func exportData(filePath string, data map[int]map[string]string) {
 		sort.Strings(mapInfoList)
 
 		for _, mapInfo := range mapInfoList {
-			fmt.Fprintf(file, "        [\"%s\"] = \"%s\",\n", mapInfo, data[id][mapInfo])
+			dataIDs := data[id][mapInfo]
+			sort.Ints(dataIDs)
+			fmt.Fprintf(file, "        [\"%s\"] = \"", mapInfo)
+			for index, dataID := range dataIDs {
+				if index == 0 {
+					fmt.Fprintf(file, "%d", dataID)
+				} else {
+					fmt.Fprintf(file, ", %d", dataID)
+				}
+
+			}
+			fmt.Fprintf(file, "\",\n")
 		}
 
 		fmt.Fprintln(file, "    },")
