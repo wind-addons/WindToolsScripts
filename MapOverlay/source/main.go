@@ -44,7 +44,14 @@ func main() {
 
 	mapTexture := make(map[int]map[string][]int)
 
-	for _, overlayTile := range overlayTiles {
+	var tileIDList []int
+	for id := range overlayTiles {
+		tileIDList = append(tileIDList, id)
+	}
+	sort.Ints(tileIDList)
+
+	for _, tileID := range tileIDList {
+		overlayTile := overlayTiles[tileID]
 		worldMapOverlayID := overlayTile.WorldMapOverlayID
 		overlay := overlays[worldMapOverlayID]
 
@@ -70,7 +77,7 @@ func main() {
 				}
 			}
 
-			if !alreadyExist {
+			if alreadyExist == false {
 				thisMap[textureInfo] = append(thisMap[textureInfo], overlayTile.FileDataID)
 			}
 		}
@@ -199,16 +206,13 @@ func exportData(filePath string, data map[int]map[string][]int) {
 		sort.Strings(mapInfoList)
 
 		for _, mapInfo := range mapInfoList {
-			dataIDs := data[id][mapInfo]
-			sort.Ints(dataIDs)
 			fmt.Fprintf(file, "        [\"%s\"] = \"", mapInfo)
-			for index, dataID := range dataIDs {
+			for index, dataID := range data[id][mapInfo] {
 				if index == 0 {
 					fmt.Fprintf(file, "%d", dataID)
 				} else {
 					fmt.Fprintf(file, ", %d", dataID)
 				}
-
 			}
 			fmt.Fprintf(file, "\",\n")
 		}
