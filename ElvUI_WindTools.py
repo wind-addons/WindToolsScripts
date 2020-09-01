@@ -1,6 +1,6 @@
 from update_locales import *
 
-addon_path = "F:\Blizzard\World of Warcraft\Development\Addons\ElvUI_WindUI\\"
+addon_path = "F:\Blizzard\World of Warcraft\Development\Addons\ElvUI_WindTools\\"
 
 # 扫描全部代码，找出需要进行本地化的字符串
 files = get_files(addon_path, ignore=["git", "Locales", "Libraries"])
@@ -16,7 +16,7 @@ for lang_code, path in locale_files.items():
 # 导入 ElvUI 翻译及旧插件的翻译
 add_other_locales("F:\Blizzard\World of Warcraft\Development\Addons\ElvUI\ElvUI\Locales", exist_locales)
 add_other_locales("F:\Blizzard\World of Warcraft\Development\Addons\ElvUI\ElvUI_OptionsUI\Locales", exist_locales)
-add_other_locales("F:\Blizzard\World of Warcraft\Development\Addons\ElvUI_WindTools\Locales", exist_locales)
+add_other_locales("F:\Blizzard\World of Warcraft\Development\Addons\ElvUI_WindTools_BfA\Locales", exist_locales)
 
 # 根据最新的字符串列表进行整理，翻译
 new_locales = {}
