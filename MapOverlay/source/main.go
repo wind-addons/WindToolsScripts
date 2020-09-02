@@ -2,13 +2,25 @@ package main
 
 import (
 	"encoding/csv"
+	"encoding/json"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
 	"os"
 	"sort"
 	"strconv"
 )
+
+type configFile struct {
+	Config config `json:"config"`
+}
+
+type config struct {
+	WorldMapOverlay     string `json:"world_map_overlay"`
+	WorldMapOverlayTile string `json:"world_map_overlay_tile"`
+	Output              string `json:"output"`
+}
 
 type overlay struct {
 	ID                int
@@ -36,11 +48,10 @@ type overlayTile struct {
 }
 
 func main() {
-	overlaysFileName := "worldmapoverlay.csv"
-	overlayTilesFileName := "worldmapoverlaytile.csv"
+	config := loadConfig("config.json")
 
-	overlays := loadOverlay(overlaysFileName)
-	overlayTiles := loadOverlayTiles(overlayTilesFileName)
+	overlays := loadOverlay(config.WorldMapOverlay)
+	overlayTiles := loadOverlayTiles(config.WorldMapOverlayTile)
 
 	mapTexture := make(map[int]map[string][]int)
 
@@ -85,7 +96,7 @@ func main() {
 		mapTexture[overlay.UIMapArtID] = thisMap
 	}
 
-	exportData("data.lua", mapTexture)
+	exportData(config.Output, mapTexture)
 }
 
 func toInt(text string) int {
@@ -94,6 +105,24 @@ func toInt(text string) int {
 		log.Fatalln("The text cannot be converted to int", err)
 	}
 	return number
+}
+
+func loadConfig(filePath string) config {
+	jsonFile, err := os.OpenFile(filePath, os.O_RDONLY, 0444)
+	if err != nil {
+		log.Fatalln("Couldn't open the csv file", err)
+	}
+	defer jsonFile.Close()
+
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		log.Fatalln("Cannot read config", err)
+	}
+
+	var configFile configFile
+	json.Unmarshal([]byte(byteValue), &configFile)
+
+	return configFile.Config
 }
 
 func loadOverlay(filePath string) map[int]overlay {

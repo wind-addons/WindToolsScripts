@@ -1,0 +1,7 @@
+{
+    "config": {
+        "world_map_overlay": "worldmapoverlay.csv",
+        "world_map_overlay_tile": "worldmapoverlaytile.csv",
+        "output": "data.lua"
+    }
+}
