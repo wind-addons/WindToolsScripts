@@ -1,0 +1,1 @@
+go build -o CheckGlobals.exe main.go

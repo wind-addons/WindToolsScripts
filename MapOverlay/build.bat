@@ -1,2 +1,1 @@
-cd source
-go build -o ../dist/GetMapOverlay.exe main.go
+go build -o GetMapOverlay.exe main.go
