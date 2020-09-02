@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 )
 
 type configFile struct {
@@ -15,7 +16,8 @@ type configFile struct {
 }
 
 type config struct {
-	FolderPath string `json:"folder"`
+	FolderPath string   `json:"folder"`
+	Exclude    []string `json:"exclude"`
 }
 
 func main() {
@@ -29,6 +31,19 @@ func main() {
 	luaFiles := getLuaFiles(absoluteFolderPath)
 
 	for _, luaFile := range luaFiles {
+		isExclude := false
+
+		if len(config.Exclude) > 0 {
+			for _, excludeString := range config.Exclude {
+				if strings.Contains(luaFile, excludeString) {
+					isExclude = true
+				}
+			}
+		}
+
+		if isExclude {
+			continue
+		}
 
 		args := "lua\\luac.exe -l -p %LUAFILE% | lua\\lua.exe globals.lua %LUAFILE%"
 		cmd := exec.Command("cmd", "/c", args)

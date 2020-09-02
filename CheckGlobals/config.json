@@ -1,5 +1,8 @@
 {
     "config": {
-        "folder": "F:\\Blizzard\\World of Warcraft\\Development\\Addons\\ElvUI_WindTools"
+        "folder": "F:\\Blizzard\\World of Warcraft\\Development\\Addons\\ElvUI_WindTools",
+        "exclude": [
+            "Libraries"
+        ]
     }
 }
