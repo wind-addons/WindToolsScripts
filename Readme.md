@@ -2,6 +2,9 @@
 
 Here are some scripts used in development of ElvUI_WindTools.
 
+## CheckGlobals
+
+Analyse the global variables using. (Based on FindGlobals.)
 
 ## MergeLocales
 
