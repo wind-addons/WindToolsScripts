@@ -18,6 +18,7 @@ type configFile struct {
 type config struct {
 	FolderPath string   `json:"folder"`
 	Exclude    []string `json:"exclude"`
+	Output     string   `json:"output"`
 }
 
 func main() {
@@ -29,6 +30,12 @@ func main() {
 	}
 
 	luaFiles := getLuaFiles(absoluteFolderPath)
+
+	file, err := os.OpenFile(config.Output, os.O_CREATE|os.O_TRUNC, 0666)
+	if err != nil {
+		log.Fatalln("Couldn't open the result file.", err)
+	}
+	defer file.Close()
 
 	for _, luaFile := range luaFiles {
 		isExclude := false
@@ -50,8 +57,13 @@ func main() {
 		cmd.Env = append(os.Environ(),
 			fmt.Sprintf(`LUAFILE="%s"`, luaFile),
 		)
+
 		out, _ := cmd.CombinedOutput()
-		fmt.Println(string(out))
+
+		output := string(out)
+		if len(output) > 2 {
+			fmt.Fprintln(file, output)
+		}
 	}
 }
 
