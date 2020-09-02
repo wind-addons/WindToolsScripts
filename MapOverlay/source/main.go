@@ -97,7 +97,7 @@ func toInt(text string) int {
 }
 
 func loadOverlay(filePath string) map[int]overlay {
-	csvfile, err := os.Open(filePath)
+	csvfile, err := os.OpenFile(filePath, os.O_RDONLY, 0444)
 	if err != nil {
 		log.Fatalln("Couldn't open the csv file", err)
 	}
@@ -145,7 +145,7 @@ func loadOverlay(filePath string) map[int]overlay {
 }
 
 func loadOverlayTiles(filePath string) map[int]overlayTile {
-	csvfile, err := os.Open(filePath)
+	csvfile, err := os.OpenFile(filePath, os.O_RDONLY, 0444)
 	if err != nil {
 		log.Fatalln("Couldn't open the csv file", err)
 	}
@@ -181,8 +181,7 @@ func loadOverlayTiles(filePath string) map[int]overlayTile {
 }
 
 func exportData(filePath string, data map[int]map[string][]int) {
-	os.Remove(filePath)
-	file, err := os.Create(filePath)
+	file, err := os.OpenFile(filePath, os.O_CREATE|os.O_TRUNC, 0666)
 	if err != nil {
 		log.Fatalln("Couldn't open the result file.", err)
 	}
