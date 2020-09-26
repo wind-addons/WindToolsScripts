@@ -1,0 +1,9 @@
+{
+    "config": {
+        "folder": "F:\\Blizzard\\World of Warcraft\\Development\\Addons\\WindDungeonHelper",
+        "exclude": [
+            "Libraries"
+        ],
+        "output" : "C:\\Users\\fang2hou\\Desktop\\check.txt"
+    }
+}
