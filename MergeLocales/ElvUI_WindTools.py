@@ -18,7 +18,7 @@ add_other_locales("F:/Blizzard/World of Warcraft/Development/Addons/ElvUI/ElvUI/
 add_other_locales("F:/Blizzard/World of Warcraft/Development/Addons/ElvUI/ElvUI_OptionsUI/Locales", exist_locales)
 add_other_locales("F:/Blizzard/World of Warcraft/Development/Addons/ElvUI_WindTools_BfA/Locales", exist_locales)
 add_other_locales("F:/Blizzard/World of Warcraft/Development/Addons/WindDungeonHelper/", exist_locales)
-
+add_other_locales("F:/Blizzard/World of Warcraft/Development/Addons/ElvUI_MerathilisUI/ElvUI_MerathilisUI/Locales/", exist_locales)
 # 根据最新的字符串列表进行整理，翻译
 new_locales = {}
 for lang_code in exist_locales:
