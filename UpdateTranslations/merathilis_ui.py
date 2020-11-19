@@ -8,8 +8,8 @@ for lang_code, path in locale_files.items():
 
 add_other_locales(
     "F:/Blizzard/World of Warcraft/Development/Addons/ElvUI/ElvUI/Locales", exist_locales)
-add_other_locales(
-    "F:/Blizzard/World of Warcraft/Development/Addons/ElvUI/ElvUI_OptionsUI/Locales", exist_locales)
+#add_other_locales(
+#    "F:/Blizzard/World of Warcraft/Development/Addons/ElvUI/ElvUI_OptionsUI/Locales", exist_locales)
 add_other_locales(
     "F:/Blizzard/World of Warcraft/Development/Addons/ElvUI_WindTools/Locales", exist_locales)
 add_other_locales(
