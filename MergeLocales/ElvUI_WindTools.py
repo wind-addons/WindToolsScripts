@@ -15,7 +15,7 @@ for lang_code, path in locale_files.items():
 
 # 导入 ElvUI 翻译及旧插件的翻译
 add_other_locales("F:/Blizzard/World of Warcraft/Development/Addons/ElvUI/ElvUI/Locales", exist_locales)
-add_other_locales("F:/Blizzard/World of Warcraft/Development/Addons/ElvUI/ElvUI_OptionsUI/Locales", exist_locales)
+#add_other_locales("F:/Blizzard/World of Warcraft/Development/Addons/ElvUI/ElvUI_OptionsUI/Locales", exist_locales)
 add_other_locales("F:/Blizzard/World of Warcraft/Development/Addons/ElvUI_WindTools_BfA/Locales", exist_locales)
 add_other_locales("F:/Blizzard/World of Warcraft/Development/Addons/WindDungeonHelper/", exist_locales)
 add_other_locales("F:/Blizzard/World of Warcraft/Development/Addons/ElvUI_MerathilisUI/ElvUI_MerathilisUI/Locales/", exist_locales)
