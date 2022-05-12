@@ -1,19 +1,18 @@
 from update_locales import *
 
-addon_path = "C:/Games/Blizzard/World of Warcraft/Development/Addons/ElvUI_MerathilisUI/ElvUI_MerathilisUI/"
+addon_folder = "H:/Blizzard/World of Warcraft/Development/Addons/"
+addon_path = addon_folder + "ElvUI_MerathilisUI/ElvUI_MerathilisUI/Core/"
+
 locale_files = get_exist_locale_list(addon_path + "Locales")
 exist_locales = {}
 for lang_code, path in locale_files.items():
     exist_locales[lang_code] = get_exist_locales(path)
 
-add_other_locales(
-    "C:/Games/Blizzard/World of Warcraft/Development/Addons/ElvUI/ElvUI/Locales", exist_locales)
-#add_other_locales(
-#    "C:/Games/Blizzard/World of Warcraft/Development/Addons/ElvUI/ElvUI_OptionsUI/Locales", exist_locales)
-add_other_locales(
-    "C:/Games/Blizzard/World of Warcraft/Development/Addons/ElvUI_WindTools/Locales", exist_locales)
-add_other_locales(
-    "C:/Games/Blizzard/World of Warcraft/Development/Addons/WindDungeonHelper/", exist_locales)
+add_other_locales(addon_folder+"ElvUI/ElvUI/Core/Locales", exist_locales)
+add_other_locales(addon_folder+"ElvUI/ElvUI_OptionsUI/Locales", exist_locales)
+add_other_locales(addon_folder+"ElvUI_WindTools/Locales", exist_locales)
+add_other_locales(addon_folder+"WindDungeonHelper/Locales", exist_locales)
+
 
 for lang_code, database in exist_locales.items():
     with open(addon_path+"Locales/{}.lua".format(lang_code), "r", encoding='utf8') as f:

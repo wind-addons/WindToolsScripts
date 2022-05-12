@@ -1,2 +1,2 @@
-call conda activate deep
+call conda activate wow
 python WindDungeonHelper.py
