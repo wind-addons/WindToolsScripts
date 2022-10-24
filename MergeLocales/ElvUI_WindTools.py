@@ -1,6 +1,6 @@
 from update_locales import *
 
-addon_folder = "H:/Blizzard/World of Warcraft/Development/Addons/"
+addon_folder = "E:/Blizzard/World of Warcraft/Development/Addons/"
 addon_path = addon_folder + "ElvUI_WindTools/"
 
 # 扫描全部代码，找出需要进行本地化的字符串
