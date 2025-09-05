@@ -1,9 +1,0 @@
-{
-    "config": {
-        "folder": "H:\\Blizzard\\World of Warcraft\\Development\\Addons\\LibNPCInfo",
-        "exclude": [
-            "Libraries"
-        ],
-        "output" : "C:\\Users\\fang2hou\\Desktop\\check.txt"
-    }
-}
