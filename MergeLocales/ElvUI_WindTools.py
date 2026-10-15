@@ -33,9 +33,10 @@ for lang_code, path in locale_files.items():
   file.write('local E = unpack(ElvUI)\n')
   file.write('local L = ElvUI[1].Libs.ACL:NewLocale("ElvUI", ')
   if lang_code == "enUS":
-    file.write('"enUS", true, true)\n\n')
+    file.write('"enUS", true, true)\n')
   else:
-    file.write('"{}")\n\n'.format(lang_code))
+    file.write('"{}")\n'.format(lang_code))
+  file.write('if not L then return end\n\n')
 
   for key, value in new_locales[lang_code].items():
     if value != "":
