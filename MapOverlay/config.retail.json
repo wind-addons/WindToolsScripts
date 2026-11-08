@@ -1,0 +1,8 @@
+{
+    "config": {
+        "world_map_overlay": "retail/WorldMapOverlay.csv",
+        "world_map_overlay_tile": "retail/WorldMapOverlayTile.csv",
+        "output": "../../ElvUI_WindTools/Modules/Maps/WorldMapReveal_Retail.lua",
+        "output_style": "retail"
+    }
+}

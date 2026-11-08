@@ -1,0 +1,8 @@
+{
+    "config": {
+        "world_map_overlay": "forever/WorldMapOverlay.csv",
+        "world_map_overlay_tile": "forever/WorldMapOverlayTile.csv",
+        "output": "../../ElvUI_WindTools/Modules/Maps/WorldMapReveal_Forever.lua",
+        "output_style": "forever"
+    }
+}
