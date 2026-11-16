@@ -37,3 +37,17 @@ Retail writes `ElvUI_WindTools/Modules/Maps/WorldMapReveal_Retail.lua`. That fil
 - omit it to write a plain `local RevealDatabase = { ... }` table
 
 `go run .` with no argument uses `config.json`, reads `worldmapoverlay.csv` and `worldmapoverlaytile.csv` in this folder, and writes that plain table to `data.lua`. `build.bat` builds `GetMapOverlay.exe`, which takes the same optional config path (`GetMapOverlay.exe config.retail.json`).
+
+## ForeverItemData
+
+Builds the WoW Forever enchant library and extra item bar lists from a wow.export CSV dump. The export is semicolon-separated. The script reads `SpellItemEnchantment`, `SpellName`, `SpellEffect`, `ItemEffect`, `ItemXItemEffect`, `Item`, `ItemSparse`, and writes:
+
+- `ElvUI_WindTools/Libraries/LibItemEnchant/LibItemEnchant_Forever.lua`
+- `ElvUI_WindTools/Modules/Item/ExtraItemBar_Data_Forever.lua`
+
+Those files are loaded only for the camelot client. The default export folder is `C:\Users\dack_janiels\wow.export\Forever`. Run it from `ForeverItemData`.
+
+```powershell
+powershell -NoProfile -File .\Update-ForeverItemData.ps1
+powershell -NoProfile -File .\Update-ForeverItemData.ps1 -ExportPath "D:\export\Forever"
+```
